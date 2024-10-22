@@ -1,41 +1,17 @@
 repos:
   # Pre-commit hooks
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
-    hooks:
-      - id: check-json
-        language: conda
-      - id: pretty-format-json
-        language: conda
-        args: ['--autofix', '--indent=4', '--no-sort-keys']
-      - id: check-toml
-        language: conda
-      - id: check-xml
-        language: conda
-      - id: check-yaml
-        language: conda
-      - id: debug-statements
-        language: conda
-      - id: trailing-whitespace
-        language: conda
-        args: ['--markdown-linebreak-ext=md']
+ - repo: https://github.com/quantco/pre-commit-mirrors-mypy
+   rev: ''  # Use the sha / tag you want to point at
+   hooks:
+     - id: mypy-conda
 
-  # Black for Python formatting
-  - repo: https://github.com/psf/black
-    rev: 24.10.0
-    hooks:
-      - id: black
-        language: conda
-        additional_dependencies: ['black==22.3.0']
+ - repo: https://github.com/quantco/pre-commit-mirrors-black
+   rev: ''  # Use the sha / tag you want to point at
+   hooks:
+     - id: black-conda
 
   # isort for Python import sorting
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
-        language: conda
-        additional_dependencies: ['isort==5.9.3']
-        args: [
-          '--profile=black',     # Ensures compatibility with black
-          '--multi-line=3',      # Changes how multi-line imports are formatted
-        ]
+ - repo: https://github.com/quantco/pre-commit-mirrors-isort
+   rev: ''  # Use the sha / tag you want to point at
+   hooks:
+     - id: isort-conda
