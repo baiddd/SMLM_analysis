@@ -22,6 +22,18 @@ pixel_size = 20
 
 
 def zoom(image, lim, zoom=3, loc=2, loc1=2, loc2=4, f=1, **kwargs):
+    """zoom in the image at the location of lim
+    Args:
+        image: 2D image
+        lim: (x1, y1, x2, y2)
+        zoom: zoom rate
+        loc: location of the zoomed image
+        loc1: location of the inset axes
+        loc2: location of the inset axes
+        f: factor to adjust the zoomed image
+        kwargs: other parameters for imshow
+
+    """
     # --------
     ax = plt.gca()
     axins = zoomed_inset_axes(ax, zoom, loc=loc)  # zoom = 6
@@ -40,6 +52,20 @@ def zoom(image, lim, zoom=3, loc=2, loc1=2, loc2=4, f=1, **kwargs):
 
 
 def zoom_line(image, lim, line, c="y", zoom=3, loc=2, loc1=2, loc2=4, **kwargs):
+    """zoom in the image with line at the location of lim
+
+    Args:
+        image: 2D image
+        lim: (x1, y1, x2, y2)
+        line: (x0, y0, x1, y1)
+        c: color of the line
+        zoom: zoom rate
+        loc: location of the zoomed image
+        loc1: location of the inset axes
+        loc2: location of the inset axes
+        kwargs: other parameters for imshow
+
+    """
     # --------
     ax = plt.gca()
     axins = zoomed_inset_axes(ax, zoom, loc=loc)  # zoom = 6
@@ -62,6 +88,13 @@ def zoom_line(image, lim, line, c="y", zoom=3, loc=2, loc1=2, loc2=4, **kwargs):
 
 
 def scalebar(scale_factor=500 / pixel_size, down_scale=1):
+    """
+    Add scale bar to the image
+    Args:
+        scale_factor: scale factor
+        down_scale: down scale factor
+    """
+
     ax = plt.gca()
     fontprops = fm.FontProperties(size=30)
     asb = AnchoredSizeBar(
@@ -81,6 +114,15 @@ def scalebar(scale_factor=500 / pixel_size, down_scale=1):
 
 
 def align_image(a, b, preprocess=False):
+    """
+    Align image a to image b
+    Args:
+        a: image to be aligned
+        b: reference image
+        preprocess: whether to preprocess the image
+    Returns:
+        aligned image
+    """
     if preprocess:
         b = exposure.equalize_hist(b)
         # print(b.shape)
@@ -110,6 +152,21 @@ def plot_image1(
     title_c="Baseline",
     title_d="Retrained model",
 ):
+    """
+    Plot the image
+    Args:
+
+        data: tuple of images
+        frame_num: number of frames
+        model_number: number of models
+        zoom_lim: zoom limit
+        line: line to zoom
+        add_title: whether to add title
+        save_fig: whether to save the figure
+        show_zoom: whether to show zoomed image
+        savedir: directory to save the figure
+
+    """
     print("ploting")
     from datetime import date
 
@@ -339,7 +396,34 @@ def outputs_shareloc(
     title_c="Merged,trained on IMOD",
     title_d="Merged,trained on 3Labs",
 ):
+    """
+    Compute the SSIM and plot the images
 
+
+    Args:
+
+        DirBase_1: directory of the first model
+        DirBase_2: directory of the second model
+        DirBase_3: directory of the third model
+        key: key word to search the file
+        crop_cord: crop coordinates
+        zoom_cord: zoom coordinates
+        line: line to zoom
+        fact: factor to adjust the zoomed image
+        zoomsize: zoom size
+        chopsize: crop size
+        FrameNb: number of frames
+        name_ind: index of the name
+        add_title: whether to add title
+        save_fig: whether to save the figure
+        show_zoom: whether to show zoomed image
+        norm: whether to normalize the image
+        align_images: whether to align the images
+        savedir: directory to save the figure
+        title_c: title of the first model
+        title_d: title of the second model
+
+    """
     DIR4Workspace = os.listdir(DirBase_1)
     CellName = []
     for name in DIR4Workspace:
@@ -545,6 +629,15 @@ def outputs_shareloc(
 
 
 def draw_profile(data, line, save_fig, savedir="./outputs", title=""):
+    """
+    Draw the profile line
+    Args:
+        data: tuple of images
+        line: line to draw
+        save_fig: whether to save the figure
+        savedir: directory to save the figure
+        title: title of the figure
+    """
     wf, histin, gt, Merged_1, Merged_2, Merged_3, Reco_1, Reco_2, Reco_3 = data
     fig, ax = plt.subplots(figsize=(20, 4))
     plt.subplot(121)
